@@ -93,27 +93,6 @@ body.fondo-3d{
     color:#dcdcdc;
 }
 
-/* REJAS */
-
-.rejas{
-    position:fixed;
-    inset:0;
-    background: repeating-linear-gradient(
-        90deg,
-        rgba(255,255,255,0.08) 0px,
-        rgba(255,255,255,0.08) 6px,
-        transparent 6px,
-        transparent 90px
-    );
-    pointer-events:none;
-    transition:1.2s ease;
-}
-
-.rejas.abiertas{
-    transform:translateX(-100%);
-    opacity:0;
-}
-
 /* CONFIRMACIÓN */
 
 .center-screen{
@@ -293,6 +272,35 @@ iframe{
     margin-bottom:15px;
 }
 
+/* LUZ INSTITUCIONAL ELEGANTE */
+.luz-overlay{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle at center, rgba(253,195,0,0.25), transparent 70%);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 1.5s ease;
+    z-index:1;
+}
+
+/* CONFETI MULTICOLOR */
+.confeti{
+    position:fixed;
+    width:10px;
+    height:10px;
+    top:-10px;
+    z-index:9999;
+    border-radius:50%;
+    animation:caer linear forwards;
+}
+
+@keyframes caer{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+        opacity:0;
+    }
+}
+
 </style>
 </head>
 
@@ -306,7 +314,8 @@ iframe{
     </div>
 </div>
 
-<div class="rejas" id="rejas"></div>
+<!-- Luz institucional -->
+<div class="luz-overlay" id="luz"></div>
 
 <div class="center-screen hidden" id="pantallaConfirmacion">
     <div class="confirm-card">
@@ -362,10 +371,10 @@ iframe{
 </div>
 
 <script>
-
 function abrirCarta(){
     document.getElementById("cartaScreen").style.display="none";
     document.getElementById("pantallaConfirmacion").classList.remove("hidden");
+    document.getElementById("luz").classList.add("activa");
 }
 
 let intentos = 0;
@@ -373,22 +382,16 @@ const noBtn = document.getElementById("noBtn");
 
 function moverBoton(){
     intentos++;
-
     const distancia = 300 + (intentos * 150);
-
     const x = (Math.random() - 0.5) * distancia;
     const y = (Math.random() - 0.5) * distancia;
-
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
 
     if(intentos >= 6){
         noBtn.style.transition="all 1s ease";
         noBtn.style.transform="translate(2500px,-2500px) rotate(720deg)";
         noBtn.style.opacity="0";
-
-        setTimeout(()=>{
-            noBtn.style.display="none";
-        },1000);
+        setTimeout(()=>{ noBtn.style.display="none"; },1000);
     }
 }
 
@@ -398,11 +401,25 @@ noBtn.addEventListener("touchstart", moverBoton);
 function confirmar(){
     document.getElementById("pantallaConfirmacion").classList.add("hidden");
     document.getElementById("invitacionCompleta").classList.remove("hidden");
-    document.getElementById("rejas").classList.add("abiertas");
     document.body.classList.add("fondo-3d");
     window.scrollTo(0,0);
+    lluviaConfeti();
 }
 
+function lluviaConfeti(){
+    const colores = ["#FDC300","#27348B","#0f1c4d","#16245f","#FF6F61","#A0E7E5"];
+    for(let i=0;i<100;i++){
+        let c=document.createElement("div");
+        c.classList.add("confeti");
+        c.style.left=Math.random()*100+"vw";
+        c.style.background=colores[Math.floor(Math.random()*colores.length)];
+        c.style.animationDuration=(2+Math.random()*3)+"s";
+        c.style.width=(5+Math.random()*8)+"px";
+        c.style.height=c.style.width;
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),5000);
+    }
+}
 </script>
 
 </body>

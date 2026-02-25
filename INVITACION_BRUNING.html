@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inauguración Nuevo Pabellón - Bruning School</title>
+
+<style>
+
+:root{
+    --azul:#27348B;
+    --azul-marino:#0f1c4d;
+    --azul-marino-profundo:#0a1438;
+    --azul-marino-suave:#16245f;
+    --amarillo:#FDC300;
+    --gris:#646363;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+        linear-gradient(rgba(15,28,77,0.92), rgba(10,20,56,0.96)),
+        url("https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1920") center/cover no-repeat fixed;
+    color:white;
+    overflow-x:hidden;
+    transition:background 1.2s ease-in-out;
+}
+
+body.fondo-3d{
+    background:
+        linear-gradient(rgba(15,28,77,0.9), rgba(10,20,56,0.95)),
+        url("https://images.unsplash.com/photo-1596495577886-d920f1fb7238?q=80&w=1920") center/cover no-repeat fixed;
+}
+
+/* CARTA */
+
+.carta-screen{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+        linear-gradient(rgba(15,28,77,0.95), rgba(10,20,56,0.98)),
+        url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1920") center/cover no-repeat;
+    z-index:9999;
+}
+
+.carta{
+    background:linear-gradient(145deg,var(--azul-marino-suave),var(--azul-marino-profundo));
+    border:3px solid var(--amarillo);
+    border-radius:20px;
+    padding:60px 40px;
+    text-align:center;
+    max-width:500px;
+    width:90%;
+    cursor:pointer;
+    box-shadow:0 0 70px rgba(253,195,0,0.7);
+    animation:latido 2s infinite;
+    transition:0.4s;
+}
+
+.carta:hover{
+    transform:scale(1.05);
+}
+
+@keyframes latido{
+    0%{box-shadow:0 0 40px rgba(253,195,0,0.5);}
+    50%{box-shadow:0 0 90px rgba(253,195,0,1);}
+    100%{box-shadow:0 0 40px rgba(253,195,0,0.5);}
+}
+
+.iconos-carta{
+    font-size:42px;
+    margin-bottom:20px;
+}
+
+.titulo-carta{
+    color:var(--amarillo);
+    font-size:26px;
+    letter-spacing:3px;
+    margin-bottom:10px;
+}
+
+.sub-carta{
+    color:#dcdcdc;
+}
+
+/* REJAS */
+
+.rejas{
+    position:fixed;
+    inset:0;
+    background: repeating-linear-gradient(
+        90deg,
+        rgba(255,255,255,0.08) 0px,
+        rgba(255,255,255,0.08) 6px,
+        transparent 6px,
+        transparent 90px
+    );
+    pointer-events:none;
+    transition:1.2s ease;
+}
+
+.rejas.abiertas{
+    transform:translateX(-100%);
+    opacity:0;
+}
+
+/* CONFIRMACIÓN */
+
+.center-screen{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.confirm-card{
+    background:linear-gradient(145deg,var(--azul-marino-suave),var(--azul-marino-profundo));
+    border:2px solid var(--amarillo);
+    border-radius:18px;
+    padding:45px;
+    text-align:center;
+    max-width:600px;
+    width:100%;
+    box-shadow:0 0 70px rgba(253,195,0,0.6);
+    animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:scale(0.9);}
+    to{opacity:1; transform:scale(1);}
+}
+
+.confirm-card h2{
+    color:var(--amarillo);
+    margin-bottom:15px;
+}
+
+.btn{
+    padding:14px 28px;
+    border-radius:30px;
+    border:none;
+    font-weight:bold;
+    cursor:pointer;
+    margin:15px;
+    font-size:16px;
+    transition:0.3s;
+}
+
+.yes{
+    background:var(--amarillo);
+    color:var(--azul);
+}
+
+.no{
+    background:var(--gris);
+    color:white;
+    position:relative;
+}
+
+.btn:hover{
+    transform:scale(1.05);
+}
+
+.hidden{
+    display:none;
+}
+
+/* INVITACIÓN */
+
+.card{
+    background:linear-gradient(145deg,var(--azul-marino-suave),var(--azul-marino-profundo));
+    border:2px solid var(--amarillo);
+    border-radius:20px;
+    max-width:900px;
+    width:90%;
+    margin:60px auto;
+    padding:40px;
+    box-shadow:0 0 70px rgba(253,195,0,0.4);
+    animation:aparecer 1s ease;
+}
+
+@keyframes aparecer{
+    from{opacity:0; transform:translateY(40px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+.titulo{
+    text-align:center;
+    font-size:30px;
+    color:var(--amarillo);
+}
+
+.subtitulo{
+    text-align:center;
+    margin-bottom:25px;
+    color:#dcdcdc;
+}
+
+/* IMAGEN CON DESTELLO PREMIUM */
+
+.imagen-evento{
+    margin:25px 0;
+    text-align:center;
+}
+
+.image-box{
+    position:relative;
+    overflow:hidden;
+    border-radius:15px;
+    box-shadow:
+        0 0 25px rgba(253,195,0,0.4),
+        0 10px 30px rgba(0,0,0,0.6);
+}
+
+.image-box img{
+    width:100%;
+    display:block;
+    border-radius:15px;
+    border:3px solid var(--amarillo);
+}
+
+/* DESTELLO DORADO */
+.image-box::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:60%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(253,195,0,0.6),
+        rgba(255,255,255,0.8),
+        rgba(253,195,0,0.6),
+        transparent
+    );
+    transform:skewX(-20deg);
+    animation: brillo 5s infinite;
+}
+
+@keyframes brillo{
+    0%{ left:-100%; opacity:0; }
+    20%{ opacity:1; }
+    100%{ left:130%; opacity:0; }
+}
+
+.info{
+    line-height:1.8;
+    font-size:18px;
+}
+
+.info h3{
+    margin-top:25px;
+    margin-bottom:10px;
+    color:var(--amarillo);
+}
+
+.highlight{
+    color:var(--amarillo);
+    font-weight:bold;
+}
+
+iframe{
+    width:100%;
+    height:300px;
+    border-radius:10px;
+    margin-top:15px;
+    border:none;
+}
+
+.footer{
+    margin-top:30px;
+    text-align:center;
+    font-size:20px;
+    color:var(--amarillo);
+}
+
+.iconos{
+    font-size:26px;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="carta-screen" id="cartaScreen">
+    <div class="carta" onclick="abrirCarta()">
+        <div class="iconos-carta">🏫 🎓 📘 ✨</div>
+        <div class="titulo-carta">INVITACIÓN INSTITUCIONAL</div>
+        <div class="sub-carta">Tocar para abrir la invitación</div>
+    </div>
+</div>
+
+<div class="rejas" id="rejas"></div>
+
+<div class="center-screen hidden" id="pantallaConfirmacion">
+    <div class="confirm-card">
+        <div class="iconos">🏛️ 🎓 📘</div>
+        <h2>Inauguración Nuevo Pabellón Académico</h2>
+        <p style="margin:20px 0;">
+            ¿Confirmará su asistencia a este importante evento institucional?
+        </p>
+        <button class="btn yes" onclick="confirmar()">Confirmar asistencia</button>
+        <button class="btn no" id="noBtn">No podré asistir</button>
+    </div>
+</div>
+
+<div id="invitacionCompleta" class="hidden">
+<div class="card">
+
+    <div class="iconos">🏫 ✨ 🎓</div>
+    <div class="titulo">CEREMONIA DE INAUGURACIÓN</div>
+    <div class="subtitulo">Nuevo Pabellón Académico</div>
+
+    <div class="imagen-evento">
+        <div class="image-box">
+            <img src="img/CAMPUS.jpeg" alt="Ceremonia de Inauguración">
+        </div>
+    </div>
+
+    <div class="info">
+    El <span class="highlight">Grupo Educativo Bruning</span>
+    tiene el honor de invitarle a la ceremonia oficial de inauguración del nuevo pabellón académico.
+
+    <h3>📅 Detalles del Evento</h3>
+    <p><span class="highlight">Fecha:</span> 07 de marzo</p>
+    <p><span class="highlight">Horario:</span> 8:00 a.m. – 1:00 p.m.</p>
+    <p><span class="highlight">Lugar:</span> Sede Colegio Bruning School</p>
+
+    <h3>🗓 Programa</h3>
+    <p>🙏 Bendición del nuevo pabellón</p>
+    <p>🎉 Ceremonia oficial de inauguración</p>
+    <p>🎤 Taller de sensibilización a cargo de la Asesora de Calidad</p>
+    <p>⚽ Jornada de integración deportiva</p>
+
+    <h3>📍 Ubicación</h3>
+    <p>Campus Principal – Bruning School</p>
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1660.7759459824788!2d-79.06136170606868!3d-8.100141090734574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ad3db464fe96a9%3A0xc58f067710ea469d!2sBr%C3%BCning%20School!5e0!3m2!1ses!2spe"></iframe>
+    </div>
+
+    <div class="footer">
+        ✨ Su presencia será un honor para nuestra institución ✨
+    </div>
+
+</div>
+</div>
+
+<script>
+
+function abrirCarta(){
+    document.getElementById("cartaScreen").style.display="none";
+    document.getElementById("pantallaConfirmacion").classList.remove("hidden");
+}
+
+let intentos = 0;
+const noBtn = document.getElementById("noBtn");
+
+function moverBoton(){
+    intentos++;
+
+    const distancia = 300 + (intentos * 150);
+
+    const x = (Math.random() - 0.5) * distancia;
+    const y = (Math.random() - 0.5) * distancia;
+
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+    if(intentos >= 6){
+        noBtn.style.transition="all 1s ease";
+        noBtn.style.transform="translate(2500px,-2500px) rotate(720deg)";
+        noBtn.style.opacity="0";
+
+        setTimeout(()=>{
+            noBtn.style.display="none";
+        },1000);
+    }
+}
+
+noBtn.addEventListener("mouseover", moverBoton);
+noBtn.addEventListener("touchstart", moverBoton);
+
+function confirmar(){
+    document.getElementById("pantallaConfirmacion").classList.add("hidden");
+    document.getElementById("invitacionCompleta").classList.remove("hidden");
+    document.getElementById("rejas").classList.add("abiertas");
+    document.body.classList.add("fondo-3d");
+    window.scrollTo(0,0);
+}
+
+</script>
+
+</body>
+</html>

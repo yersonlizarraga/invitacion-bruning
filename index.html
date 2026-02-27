@@ -301,6 +301,54 @@ iframe{
     }
 }
 
+.registro-container{
+    text-align:center;
+    margin-top:25px;
+}
+
+.btn-registro{
+    display:inline-block;
+    padding:16px 35px;
+    font-size:18px;
+    font-weight:bold;
+    text-decoration:none;
+    border-radius:40px;
+    background:linear-gradient(45deg, var(--amarillo), #ffe066);
+    color:var(--azul-marino-profundo);
+    box-shadow:0 0 25px rgba(253,195,0,0.6);
+    transition:all 0.4s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+/* efecto brillo dinámico */
+.btn-registro::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:60%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.8),
+        transparent
+    );
+    transform:skewX(-20deg);
+    transition:0.6s;
+}
+
+.btn-registro:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 40px rgba(253,195,0,1);
+}
+
+.btn-registro:hover::after{
+    left:130%;
+}
+
+
 </style>
 </head>
 
@@ -366,6 +414,11 @@ iframe{
     <div class="footer">
         ✨ Su presencia será un honor para nuestra institución ✨
     </div>
+    <div class="registro-container">
+    <a href="https://forms.gle/oFEqmDbzvNxDVw9UA" target="_blank" class="btn-registro">
+        📋 Registrar Asistencia Obligatoria
+    </a>
+</div>
 
 </div>
 </div>
@@ -373,8 +426,16 @@ iframe{
 <script>
 function abrirCarta(){
     document.getElementById("cartaScreen").style.display="none";
-    document.getElementById("pantallaConfirmacion").classList.remove("hidden");
-    document.getElementById("luz").classList.add("activa");
+    
+    // Oculta confirmación (por si acaso)
+    document.getElementById("pantallaConfirmacion").classList.add("hidden");
+    
+    // Muestra directamente la invitación completa
+    document.getElementById("invitacionCompleta").classList.remove("hidden");
+    
+    document.body.classList.add("fondo-3d");
+    window.scrollTo(0,0);
+    lluviaConfeti();
 }
 
 let intentos = 0;
